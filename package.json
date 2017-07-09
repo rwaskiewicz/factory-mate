@@ -1,0 +1,35 @@
+{
+  "name": "factory-mate",
+  "version": "1.0.0",
+  "description": "TypeScript library for building domain objects",
+  "keywords": [
+    "unit testing",
+    "typescript",
+    "factory",
+    "builder"
+  ],
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "scripts": {
+    "test": "karma start",
+    "package": "tsc && npm pack"
+  },
+  "author": "Ryan Waskiewicz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rwaskiewicz/factory-mate"
+  },
+  "devDependencies": {
+    "@types/jasmine": "^2.5.47",
+    "jasmine": "^2.6.0",
+    "karma": "^1.7.0",
+    "karma-chrome-launcher": "^2.1.1",
+    "karma-jasmine": "^1.1.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-spec-reporter": "0.0.31",
+    "karma-typescript": "^3.0.1",
+    "tslint": "^5.4.2",
+    "typescript": "^2.4.0"
+  }
+}

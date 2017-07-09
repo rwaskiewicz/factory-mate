@@ -1,0 +1,7 @@
+.vscode/
+coverage/
+src/
+
+karma.conf.js
+tsconfig.json
+tslint.json
