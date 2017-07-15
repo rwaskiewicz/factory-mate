@@ -1,6 +1,7 @@
 # FactoryMate
 
-FactoryMate is a TypeScript-based fixture library for instatiating domain objects for testing purposes.
+FactoryMate is a TypeScript-based fixture library for instantiating domain objects for testing purposes, inspired by 
+the [Factory Duke](https://github.com/regis-leray/factory_duke) project.
 
 ## Getting Started
 
@@ -53,7 +54,7 @@ import { GroceryItem } from './GroceryItem';
 
 @FactoryMateAware
 export class GroceryItemFactory {
-    // The @FactoryMateAware annotation will automatically call the define() funtion at runtime
+    // The @FactoryMateAware annotation will automatically call the define() function at runtime
     public define() { 
         FactoryMate.define(GroceryItem, (): GroceryItem => {
             const groceryItem = new GroceryItem();
@@ -64,7 +65,7 @@ export class GroceryItemFactory {
 }
 ```
 
-### Additonal Building Methods
+### Additional Building Methods
 #### Overriding a Template's Variables
 If for specific tests there is a need to override one or more variables in the template, this can be accomplished via an optional parameter to `build`:
 
