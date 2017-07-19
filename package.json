@@ -12,6 +12,7 @@
   "typings": "./dist/index.d.ts",
   "scripts": {
     "test": "karma start",
+    "testSingleRun": "karma start --single-run",
     "package": "tsc && npm pack"
   },
   "author": "Ryan Waskiewicz",
@@ -22,9 +23,12 @@
   },
   "devDependencies": {
     "@types/jasmine": "^2.5.47",
+    "base64-js": "^1.0.2",
+    "ieee754": "^1.1.4",
+    "isarray": "^1.0.0",
     "jasmine": "^2.6.0",
     "karma": "^1.7.0",
-    "karma-chrome-launcher": "^2.1.1",
+    "karma-chrome-launcher": "^2.2.0",
     "karma-jasmine": "^1.1.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-spec-reporter": "0.0.31",
