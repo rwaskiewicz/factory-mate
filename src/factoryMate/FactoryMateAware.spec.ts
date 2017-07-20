@@ -38,7 +38,8 @@ describe('FactoryMateAware', () => {
 
             mockObject = Object.setPrototypeOf(mockObject, mockPrototype);
 
-            expect(() => FactoryMateAware(mockObject)).toThrowError('fixtureFactory does not have function \'define\'.');
+            expect(() => FactoryMateAware(mockObject))
+                .toThrowError('fixtureFactory does not have function \'define\'.');
         });
     });
 });
