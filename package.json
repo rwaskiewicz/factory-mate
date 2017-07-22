@@ -1,6 +1,6 @@
 {
   "name": "factory-mate",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "TypeScript library for building domain objects",
   "keywords": [
     "unit testing",
