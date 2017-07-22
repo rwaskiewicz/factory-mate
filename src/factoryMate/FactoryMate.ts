@@ -40,7 +40,7 @@ export class FactoryMate {
         });
 
         if (clazz === undefined) {
-            throw new Error(`Class with name ${objectName} is not registed to FactoryMate.`);
+            throw new Error(`Class with name ${objectName} is not registered to FactoryMate.`);
         }
 
         return clazz;

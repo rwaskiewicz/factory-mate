@@ -38,7 +38,7 @@ describe('FactoryMate', () => {
     describe('build()', () => {
         it('throws an error if the specified class is not registered', () => {
             expect(() => FactoryMate.build('UnregisteredClassName'))
-                .toThrowError('Class with name UnregisteredClassName is not registed to FactoryMate.');
+                .toThrowError('Class with name UnregisteredClassName is not registered to FactoryMate.');
         });
 
         describe('no override method is provided', () => {
