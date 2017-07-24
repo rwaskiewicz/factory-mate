@@ -1,5 +1,6 @@
 # FactoryMate
 [![Build Status](https://travis-ci.org/rwaskiewicz/factory-mate.svg?branch=develop)](https://travis-ci.org/rwaskiewicz/factory-mate)
+[![npm version](https://badge.fury.io/js/factory-mate.svg)](https://badge.fury.io/js/factory-mate)
 
 FactoryMate is a TypeScript-based fixture library for instantiating domain objects for testing purposes, inspired by 
 the [Factory Duke](https://github.com/regis-leray/factory_duke) project.
