@@ -6,7 +6,11 @@
     "unit testing",
     "typescript",
     "factory",
-    "builder"
+    "builder",
+    "tdd",
+    "bdd",
+    "test",
+    "fixture"
   ],
   "main": "./dist/index.js",
   "typings": "./dist/index.d.ts",
