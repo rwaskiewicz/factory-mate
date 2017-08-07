@@ -16,10 +16,10 @@ describe('FactoryMate', () => {
 
     describe('define()', () => {
         // Define a constructor for testing
-        let definedContructor;
+        let definedConstructor;
 
         beforeAll(() => {
-            definedContructor = FactoryMate.definedConstructors[0];
+            definedConstructor = FactoryMate.definedConstructors[0];
         });
 
         it('adds an object to the constructors list exactly once', () => {
@@ -27,11 +27,11 @@ describe('FactoryMate', () => {
         });
 
         it('has the correct constructor', () => {
-            expect(definedContructor.classConstructor).toEqual(MockClass);
+            expect(definedConstructor.classConstructor).toEqual(MockClass);
         });
 
         it('has the correct anonymous function', () => {
-            expect(definedContructor.initializationFunction).toEqual(initializationFunction);
+            expect(definedConstructor.initializationFunction).toEqual(initializationFunction);
         });
     });
 

@@ -50,7 +50,11 @@
         "trailing-comma": [
             false
         ],
-        "no-empty": false
+        "no-empty": false,
+        "interface-name": [
+            true,
+            "never-prefix"
+        ]
     },
     "rulesDirectory": []
 }

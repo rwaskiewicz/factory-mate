@@ -84,6 +84,53 @@ To build several objects of the same type:
 const groceryItems: GroceryItem[] = FactoryMate.buildMany(GroceryItem.name, 3);
 ```
 
+### Sequence Generation
+FactoryMate supports numerical sequence generation via the ```NumberGenerator``` class.  This can be helpful for the purposes of generating ID values for domain objects to better represent real world scenarios (e.g. keys in from a datastore) 
+
+In order to add sequential generation support to an entity, it can be imported into it's factory as such:
+``` typescript
+import { FactoryMate, FactoryMateAware } from 'factory-mate';
+import { NumberGenerator } from 'factory-mate';
+import { GroceryItem } from './GroceryItem';
+
+@FactoryMateAware
+export class GroceryItemFactory {
+    public define() {
+        // Defines the NumberGenerator instance to be used across all calls to FactoryMate.build(GroceryItem.name);
+        const numberGenerator = new NumberGenerator();
+
+        FactoryMate.define(GroceryItem, (): GroceryItem => {
+            const groceryItem = new GroceryItem();
+            // The nextValue() method retrieves the next value in the sequence
+            groceryItem.id = numberGenerator.nextValue();
+            groceryItem.groceryName = 'chewy cookies';
+            return groceryItem;
+        });
+    }
+}
+```
+Using the factory method above, three sequential calls to ```FactoryMate.build(GroceryItem.name)``` will result in the following:
+
+``` typescript
+const groceryItem1: GroceryItem = FactoryMate.build(GroceryItem.name);
+const groceryItem2: GroceryItem = FactoryMate.build(GroceryItem.name);
+const groceryItem3: GroceryItem = FactoryMate.build(GroceryItem.name);
+
+console.log(JSON.stringify(groceryItem1)); //'{"id":1,"groceryName":"chewy cookies"}'
+console.log(JSON.stringify(groceryItem2)); //'{"id":2,"groceryName":"chewy cookies"}'
+console.log(JSON.stringify(groceryItem3)); //'{"id":3,"groceryName":"chewy cookies"}'
+```
+#### Changing sequence values
+By default, ```NumberGenerator``` starts at a value of 1 and increments by 1.  These values can be altered at instantiation time if desired
+``` typescript
+// Start at one, increment by one: 1, 2, 3 ...
+const numberGenerator = new NumberGenerator();
+// Start at one, increment by two: 1, 3, 5 ...
+const numberGenerator = new NumberGenerator(1, 2);
+// Start at zero, increment by one: 0, 1, 2, ...
+const numberGenerator = new NumberGenerator(0);
+```
+
 ## Example
 An example project using FactoryMate can be found here [FactoryMateConsumer](https://github.com/rwaskiewicz/factory-mate-consumer)
 
