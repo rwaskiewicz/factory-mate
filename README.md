@@ -1,6 +1,7 @@
 # FactoryMate
 [![Build Status](https://travis-ci.org/rwaskiewicz/factory-mate.svg?branch=develop)](https://travis-ci.org/rwaskiewicz/factory-mate)
 [![npm version](https://badge.fury.io/js/factory-mate.svg)](https://badge.fury.io/js/factory-mate)
+[![Coverage Status](https://coveralls.io/repos/github/rwaskiewicz/factory-mate/badge.svg?branch=develop)](https://coveralls.io/github/rwaskiewicz/factory-mate?branch=develop)
 
 FactoryMate is a TypeScript-based fixture library for instantiating domain objects for testing purposes, inspired by 
 the [Factory Duke](https://github.com/regis-leray/factory_duke) project.
@@ -85,7 +86,7 @@ const groceryItems: GroceryItem[] = FactoryMate.buildMany(GroceryItem.name, 3);
 ```
 
 ### Sequence Generation
-FactoryMate supports numerical sequence generation via the ```NumberGenerator``` class.  This can be helpful for the purposes of generating ID values for domain objects to better represent real world scenarios (e.g. keys in from a datastore) 
+FactoryMate supports numerical sequence generation via the ```NumberGenerator``` class.  This can be helpful for the purposes of generating ID values for domain objects to better represent real world scenarios (e.g. keys in a datastore) 
 
 In order to add sequential generation support to an entity, it can be imported into it's factory as such:
 ``` typescript

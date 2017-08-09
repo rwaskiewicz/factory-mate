@@ -12,6 +12,14 @@ module.exports = function (config) {
         karmaTypescriptConfig: {
             compilerOptions: {
                 lib: ["es6", "dom"]
+            },
+            reports: {
+                "html": "coverage",
+                "lcovonly": {
+                    "directory": "coverage",
+                    "filename": "lcov.info",
+                    "subdirectory": "lcov"
+                }
             }
         },
         browsers: ["Chrome"],

@@ -18,7 +18,9 @@
     "lint": "tslint  \"src/**/*.ts\"",
     "test": "karma start",
     "testSingleRun": "karma start --single-run",
-    "package": "tsc && npm pack"
+    "package": "tsc && npm pack",
+    "report-coverage": "cat ./coverage/lcov/lcov.info | coveralls"
+
   },
   "author": "Ryan Waskiewicz",
   "license": "MIT",
@@ -29,6 +31,7 @@
   "devDependencies": {
     "@types/jasmine": "^2.5.47",
     "base64-js": "^1.0.2",
+    "coveralls": "^2.13.1",
     "ieee754": "^1.1.4",
     "isarray": "^1.0.0",
     "jasmine": "^2.6.0",
