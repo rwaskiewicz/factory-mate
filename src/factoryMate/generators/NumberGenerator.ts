@@ -1,6 +1,6 @@
 import { Generator } from './Generator';
 
-export class NumberGenerator implements Generator {
+export class NumberGenerator implements Generator<number> {
     private currentValue: number;
     private increment: number;
 

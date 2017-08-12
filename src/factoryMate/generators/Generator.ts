@@ -1,3 +1,3 @@
-export interface Generator {
-    nextValue(): number;
+export interface Generator<T> {
+    nextValue(): T;
 }

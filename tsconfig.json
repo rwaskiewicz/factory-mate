@@ -15,6 +15,9 @@
     "files": [
         "src/index.ts",
         "src/factoryMate/FactoryMate.ts",
-        "src/factoryMate/FactoryMateAware.ts"
+        "src/factoryMate/FactoryMateAware.ts",
+        "src/factoryMate/generators/Generator.ts",
+        "src/factoryMate/generators/NumberGenerator.ts",
+        "src/factoryMate/generators/ProvidedValueGenerator.ts"
     ]
 }

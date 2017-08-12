@@ -86,7 +86,7 @@ const groceryItems: GroceryItem[] = FactoryMate.buildMany(GroceryItem.name, 3);
 ```
 
 ### Sequence Generation
-FactoryMate supports numerical sequence generation via the ```NumberGenerator``` class.  This can be helpful for the purposes of generating ID values for domain objects to better represent real world scenarios (e.g. keys in a datastore) 
+FactoryMate supports infinite, numerical sequence generation via the ```NumberGenerator``` class.  This can be helpful for the purposes of generating ID values for domain objects to better represent real world scenarios (e.g. keys in a data store) 
 
 In order to add sequential generation support to an entity, it can be imported into it's factory as such:
 ``` typescript
@@ -130,6 +130,18 @@ const numberGenerator = new NumberGenerator();
 const numberGenerator = new NumberGenerator(1, 2);
 // Start at zero, increment by one: 0, 1, 2, ...
 const numberGenerator = new NumberGenerator(0);
+```
+
+### ProvidedValueGenerator
+
+FactoryMate also supports finite sequence generation by means of the `ProvidedValueGenerator` class. `ProvidedValueGenerator` is capable of returning values from an `Array` of numbers, strings, objects, etc. that was provided to the class upon instantiation:
+
+``` typescript
+let providedValueGenerator = new ProvidedValueGenerator(['up', 'left', 'right']);
+const firstValue = providedValueGenerator.nextValue();  // 'up'
+const secondValue = providedValueGenerator.nextValue(); // 'left'
+const thirdValue = providedValueGenerator.nextValue();  // 'right'
+const fourthValue = providedValueGenerator.nextValue(); // Error: 'Out of bounds!'
 ```
 
 ## Example

@@ -18,7 +18,7 @@
     "lint": "tslint  \"src/**/*.ts\"",
     "test": "karma start",
     "testSingleRun": "karma start --single-run",
-    "package": "tsc && npm pack",
+    "package": "rm -rf ./dist && tsc && npm pack",
     "report-coverage": "cat ./coverage/lcov/lcov.info | coveralls"
 
   },
