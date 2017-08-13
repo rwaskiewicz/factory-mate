@@ -137,7 +137,7 @@ const numberGenerator = new NumberGenerator(0);
 FactoryMate also supports finite sequence generation by means of the `ProvidedValueGenerator` class. `ProvidedValueGenerator` is capable of returning values from an `Array` of numbers, strings, objects, etc. that was provided to the class upon instantiation:
 
 ``` typescript
-let providedValueGenerator = new ProvidedValueGenerator(['up', 'left', 'right']);
+const providedValueGenerator = new ProvidedValueGenerator(['up', 'left', 'right']);
 const firstValue = providedValueGenerator.nextValue();  // 'up'
 const secondValue = providedValueGenerator.nextValue(); // 'left'
 const thirdValue = providedValueGenerator.nextValue();  // 'right'
