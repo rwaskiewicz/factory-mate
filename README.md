@@ -134,7 +134,7 @@ const numberGenerator = new NumberGenerator(0);
 
 ### ProvidedValueGenerator
 
-FactoryMate also supports finite sequence generation by means of the `ProvidedValueGenerator` class. `ProvidedValueGenerator` is capable of returning values from an `Array` of numbers, strings, objects, etc. that was provided to the class upon instantiation:
+FactoryMate also supports sequence generation by means of the `ProvidedValueGenerator` class. `ProvidedValueGenerator` is capable of returning values from an `Array` of numbers, strings, objects, etc. that was provided to the class upon instantiation:
 
 ``` typescript
 const providedValueGenerator = new ProvidedValueGenerator(['up', 'left', 'right']);
@@ -142,6 +142,18 @@ const firstValue = providedValueGenerator.nextValue();  // 'up'
 const secondValue = providedValueGenerator.nextValue(); // 'left'
 const thirdValue = providedValueGenerator.nextValue();  // 'right'
 const fourthValue = providedValueGenerator.nextValue(); // Error: 'Out of bounds!'
+```
+
+By default, `ProvidedValueGenerator` supports finite-sequence generation.  In order to create an infinite-sequence generator, set the `continuousMode` flag to `true` as a part of the class's instantiation:
+``` typescript
+const providedValueGenerator = new ProvidedValueGenerator(['up', 'left', 'right'], true);
+const firstValue = providedValueGenerator.nextValue();  // 'up'
+const secondValue = providedValueGenerator.nextValue(); // 'left'
+const thirdValue = providedValueGenerator.nextValue();  // 'right'
+const fourthValue = providedValueGenerator.nextValue(); // 'up'
+const fifthValue = providedValueGenerator.nextValue(); // 'left'
+const sixthValue = providedValueGenerator.nextValue();  // 'right'
+...
 ```
 
 ## Example

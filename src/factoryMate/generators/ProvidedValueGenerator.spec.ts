@@ -123,4 +123,34 @@ describe('ProvidedValueGenerator', () => {
             expect(() => providedValueGenerator.nextValue()).toThrowError('Out of bounds!');
         });
     });
+
+    describe('nextValue(), continuous mode', () => {
+        let providedValueGenerator: ProvidedValueGenerator<string>;
+
+        beforeEach(() => {
+            const providedValues = ['up', 'down'];
+            providedValueGenerator = new ProvidedValueGenerator(providedValues, true);
+        });
+
+        it('returns the first value correctly', () => {
+            const firstValue = providedValueGenerator.nextValue();
+
+            expect(firstValue).toBe('up');
+        });
+
+        it('returns the second value correctly', () => {
+            providedValueGenerator.nextValue();
+            const secondValue = providedValueGenerator.nextValue();
+
+            expect(secondValue).toBe('down');
+        });
+
+        it('cycles back to the beginning and returns the third value correctly', () => {
+            providedValueGenerator.nextValue();
+            providedValueGenerator.nextValue();
+            const thirdValue = providedValueGenerator.nextValue();
+
+            expect(thirdValue).toBe('up');
+        });
+    });
 });
