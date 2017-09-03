@@ -1,23 +1,23 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es5",
-        "declaration": true,
-        "noImplicitAny": false,
-        "sourceMap": false,
-        "outDir": "dist",
-        "experimentalDecorators": true,
-        "lib": [
-            "es6",
-            "dom"
-        ]
-    },
-    "files": [
-        "src/index.ts",
-        "src/factoryMate/FactoryMate.ts",
-        "src/factoryMate/FactoryMateAware.ts",
-        "src/factoryMate/generators/Generator.ts",
-        "src/factoryMate/generators/NumberGenerator.ts",
-        "src/factoryMate/generators/ProvidedValueGenerator.ts"
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "declaration": true,
+    "noImplicitAny": false,
+    "sourceMap": false,
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "lib": [
+      "es6",
+      "dom"
     ]
+  },
+  "files": [
+    "src/index.ts",
+    "src/factoryMate/FactoryMate.ts",
+    "src/factoryMate/FactoryMateAware.ts",
+    "src/factoryMate/generators/Generator.ts",
+    "src/factoryMate/generators/NumberGenerator.ts",
+    "src/factoryMate/generators/ProvidedValueGenerator.ts"
+  ]
 }

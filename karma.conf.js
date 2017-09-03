@@ -1,39 +1,39 @@
 module.exports = function (config) {
-    var configuration = {
-        frameworks: ["jasmine", "karma-typescript"],
-        files: [
-            { pattern: "src/**/*.ts" },
-        ],
-        preprocessors: {
-            "**/*.ts": ["karma-typescript"],
-            '**/*.js.map': ['sourcemap']
-        },
-        reporters: ["karma-typescript", "spec"],
-        karmaTypescriptConfig: {
-            compilerOptions: {
-                lib: ["es6", "dom"]
-            },
-            reports: {
-                "html": "coverage",
-                "lcovonly": {
-                    "directory": "coverage",
-                    "filename": "lcov.info",
-                    "subdirectory": "lcov"
-                }
-            }
-        },
-        browsers: ["Chrome"],
-        customLaunchers: {
-            Chrome_travis_ci: {
-                base: 'Chrome',
-                flags: ['--no-sandbox']
-            }
-        }
-    };
+	var configuration = {
+		frameworks: ["jasmine", "karma-typescript"],
+		files: [
+			{ pattern: "src/**/*.ts" },
+		],
+		preprocessors: {
+			"**/*.ts": ["karma-typescript"],
+			'**/*.js.map': ['sourcemap']
+		},
+		reporters: ["karma-typescript", "spec"],
+		karmaTypescriptConfig: {
+			compilerOptions: {
+				lib: ["es6", "dom"]
+			},
+			reports: {
+				"html": "coverage",
+				"lcovonly": {
+					"directory": "coverage",
+					"filename": "lcov.info",
+					"subdirectory": "lcov"
+				}
+			}
+		},
+		browsers: ["Chrome"],
+		customLaunchers: {
+			Chrome_travis_ci: {
+				base: 'Chrome',
+				flags: ['--no-sandbox']
+			}
+		}
+	};
 
-    if (process.env.TRAVIS) {
-        configuration.browsers = ['Chrome_travis_ci'];
-    }
+	if (process.env.TRAVIS) {
+		configuration.browsers = ['Chrome_travis_ci'];
+	}
 
-    config.set(configuration);
+	config.set(configuration);
 }; 

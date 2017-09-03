@@ -1,3 +1,3 @@
 export interface Generator<T> {
-    nextValue(): T;
+  nextValue(): T;
 }
