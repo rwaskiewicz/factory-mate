@@ -69,6 +69,33 @@ export class GroceryItemFactory {
 ```
 
 ### Additional Building Methods
+#### Named Templates
+In certain cases, it may be desirable to have more than one template per class.  In order to create more than one template per class, or to give a template a name other than the class it is representing, a 'named template' can be created using ```defineWithName```:
+
+``` typescript
+// GroceryItemFactory.ts
+import { FactoryMate, FactoryMateAware } from 'factory-mate';
+import { GroceryItem } from './GroceryItem';
+
+@FactoryMateAware
+export class GroceryItemFactory {
+    // The @FactoryMateAware annotation will automatically call the define() function at runtime
+    public define() { 
+        FactoryMate.define(GroceryItem, (): GroceryItem => {
+            const groceryItem = new GroceryItem();
+            groceryItem.groceryName = 'crispy chips';
+            return groceryItem;
+        });
+
+        FactoryMate.defineWithName(GroceryItem, 'specialChips', (): GroceryItem => {
+            const groceryItem = new GroceryItem();
+            groceryItem.groceryName = 'limited edition flavor chips';
+            return groceryItem;
+        });
+    }
+}
+```
+
 #### Overriding a Template's Variables
 If for specific tests there is a need to override one or more variables in the template, this can be accomplished via an optional parameter to `build`:
 
@@ -86,7 +113,7 @@ const groceryItems: GroceryItem[] = FactoryMate.buildMany(GroceryItem.name, 3);
 ```
 
 ### Sequence Generation
-FactoryMate supports infinite, numerical sequence generation via the ```NumberGenerator``` class.  This can be helpful for the purposes of generating ID values for domain objects to better represent real world scenarios (e.g. keys in a data store) 
+FactoryMate supports infinite, numerical sequence generation via the ```NumberGenerator``` class.  This can be helpful for the purposes of generating ID values for domain objects to better represent real world scenarios (e.g. IDs in a data store) 
 
 In order to add sequential generation support to an entity, it can be imported into it's factory as such:
 ``` typescript

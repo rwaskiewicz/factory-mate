@@ -1,5 +1,5 @@
+import { SampleItem } from '../test-fixtures/SampleItem';
 import { ProvidedValueGenerator } from './ProvidedValueGenerator';
-import { SampleItem } from './test-fixtures/SampleItem';
 
 describe('ProvidedValueGenerator', () => {
     describe('nextValue(): string', () => {

@@ -2,8 +2,13 @@ export class FactoryMate {
     public static definedConstructors: any[] = [];
 
     public static define(cns: any, initFunction: () => void) {
+        FactoryMate.defineWithName(cns, cns.name, initFunction);
+    }
+
+    public static defineWithName(cns: any, alias: string, initFunction: () => void) {
         FactoryMate.definedConstructors.push(
             {
+                classAlias: alias,
                 classConstructor: cns,
                 initializationFunction: initFunction
             }
@@ -35,9 +40,7 @@ export class FactoryMate {
     }
 
     private static locateConstructor(objectName: string) {
-        const clazz = FactoryMate.definedConstructors.find((stored) => {
-            return stored.classConstructor.name === objectName;
-        });
+        const clazz = FactoryMate.definedConstructors.find((stored) => stored.classAlias === objectName);
 
         if (clazz === undefined) {
             throw new Error(`Class with name ${objectName} is not registered to FactoryMate.`);

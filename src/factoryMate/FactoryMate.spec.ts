@@ -1,83 +1,176 @@
 import { FactoryMate } from './FactoryMate';
 
+import { SampleItem } from './test-fixtures/SampleItem';
+import { SampleItemWithPrice } from './test-fixtures/SampleItemWithPrice';
+
 describe('FactoryMate', () => {
-    // Define mocked class and the initialization function
-    class MockClass {
-        public mockProperty: string;
-    }
-    const initializationFunction = () => new MockClass();
+    // These initialization functions will be used throughout the test suite
+    const sampleItemInitializer = () => new SampleItem(1, 'Sample Item Name');
+    const sampleItemWithPriceInitializer = () => new SampleItemWithPrice(2, 'Priced Sample Item Name', 3.50);
 
     beforeAll(() => {
         if (FactoryMate.definedConstructors.length !== 0) {
             fail('The initial value of the constructors should be zero');
         }
-        FactoryMate.define(MockClass, initializationFunction);
+        FactoryMate.define(SampleItem, sampleItemInitializer);
+        FactoryMate.defineWithName(SampleItemWithPrice, 'MockSampleItemWithPrice', sampleItemWithPriceInitializer);
     });
 
     describe('define()', () => {
-        // Define a constructor for testing
         let definedConstructor;
 
         beforeAll(() => {
             definedConstructor = FactoryMate.definedConstructors[0];
         });
 
-        it('adds an object to the constructors list exactly once', () => {
-            expect(FactoryMate.definedConstructors.length).toBe(1);
-        });
-
         it('has the correct constructor', () => {
-            expect(definedConstructor.classConstructor).toEqual(MockClass);
+            expect(definedConstructor.classConstructor).toEqual(SampleItem);
         });
 
         it('has the correct anonymous function', () => {
-            expect(definedConstructor.initializationFunction).toEqual(initializationFunction);
+            expect(definedConstructor.initializationFunction).toEqual(sampleItemInitializer);
+        });
+    });
+
+    describe('defineWithName()', () => {
+        let definedConstructor;
+
+        beforeAll(() => {
+            definedConstructor = FactoryMate.definedConstructors[1];
+        });
+
+        it('has the correct constructor', () => {
+            expect(definedConstructor.classConstructor).toEqual(SampleItemWithPrice);
+        });
+
+        it('has the correct anonymous function', () => {
+            expect(definedConstructor.initializationFunction).toEqual(sampleItemWithPriceInitializer);
         });
     });
 
     describe('build()', () => {
-        it('throws an error if the specified class is not registered', () => {
-            expect(() => FactoryMate.build('UnregisteredClassName'))
-                .toThrowError('Class with name UnregisteredClassName is not registered to FactoryMate.');
-        });
+        describe('default name', () => {
+            it('throws an error if the specified class is not registered', () => {
+                expect(() => FactoryMate.build('UnregisteredClassName'))
+                    .toThrowError('Class with name UnregisteredClassName is not registered to FactoryMate.');
+            });
 
-        describe('no override method is provided', () => {
-            it('calls the constructor when no override method is provided', () => {
-                const mockClass: MockClass = FactoryMate.build(MockClass.name);
+            describe('no override method is provided', () => {
+                it('calls the constructor when no override method is provided', () => {
+                    const mockSampleItem: SampleItem = FactoryMate.build(SampleItem.name);
 
-                expect(mockClass).toBeDefined();
-                expect(mockClass.mockProperty).toBeUndefined();
+                    expect(mockSampleItem).toBeDefined();
+                    expect(mockSampleItem.id).toBe(1);
+                    expect(mockSampleItem.name).toBe('Sample Item Name');
+                });
+            });
+
+            describe('an override method is provided', () => {
+                it('calls the provided override method', () => {
+                    const mockSampleItem: SampleItem = FactoryMate.build(SampleItem.name, (builtObject) => {
+                        builtObject.id = 2;
+                        builtObject.name = 'Overridden Property Name';
+                    });
+
+                    expect(mockSampleItem.id).toBe(2);
+                    expect(mockSampleItem.name).toBe('Overridden Property Name');
+                });
             });
         });
 
-        describe('an override method is provided', () => {
-            it('calls the provided override method', () => {
-                const mockClass: MockClass = FactoryMate.build(MockClass.name, (builtObject) => {
-                    builtObject.mockProperty = 'fooBar';
-                });
+        describe('specifying class name', () => {
+            describe('no override method is provided', () => {
+                it('calls the constructor when no override method is provided', () => {
+                    const mockSampleItem: SampleItem = FactoryMate.build('SampleItem');
 
-                expect(mockClass.mockProperty).toBe('fooBar');
+                    expect(mockSampleItem).toBeDefined();
+                    expect(mockSampleItem.id).toBe(1);
+                    expect(mockSampleItem.name).toBe('Sample Item Name');
+                });
+            });
+
+            describe('an override method is provided', () => {
+                it('calls the provided override method', () => {
+                    const mockSampleItem: SampleItemWithPrice = FactoryMate.build('MockSampleItemWithPrice',
+                        (builtObject) => {
+                            builtObject.id = 3;
+                            builtObject.name = 'Overridden Property Name';
+                            builtObject.price = 0.99;
+                        });
+
+                    expect(mockSampleItem.id).toBe(3);
+                    expect(mockSampleItem.name).toBe('Overridden Property Name');
+                    expect(mockSampleItem.price).toBe(0.99);
+                });
+            });
+        });
+
+        describe('specifying class alias', () => {
+            describe('no override method is provided', () => {
+                it('calls the constructor when no override method is provided', () => {
+                    const mockSampleItem: SampleItemWithPrice = FactoryMate.build('MockSampleItemWithPrice');
+
+                    expect(mockSampleItem).toBeDefined();
+                    expect(mockSampleItem.id).toBe(2);
+                    expect(mockSampleItem.name).toBe('Priced Sample Item Name');
+                });
+            });
+
+            describe('an override method is provided', () => {
+                it('calls the provided override method', () => {
+                    const mockSampleItem: SampleItem = FactoryMate.build('MockSampleItemWithPrice', (builtObject) => {
+                        builtObject.id = 2;
+                        builtObject.name = 'Overridden Property Name';
+                    });
+
+                    expect(mockSampleItem.id).toBe(2);
+                    expect(mockSampleItem.name).toBe('Overridden Property Name');
+                });
             });
         });
     });
 
     describe('buildMany()', () => {
-        it('returns the provided count of the desired object', () => {
-            const mockClassList = FactoryMate.buildMany(MockClass.name, 2);
+        describe('default name', () => {
+            it('returns the provided count of the desired object', () => {
+                const mockSampleItemList = FactoryMate.buildMany(SampleItem.name, 2);
 
-            expect(mockClassList.length).toBe(2);
+                expect(mockSampleItemList.length).toBe(2);
+            });
+
+            it('returns the one object when no value is provided', () => {
+                const mockSampleItemList = FactoryMate.buildMany(SampleItem.name);
+
+                expect(mockSampleItemList.length).toBe(1);
+            });
+
+            it('returns the one object when a value less than one is provided', () => {
+                const mockSampleItemList = FactoryMate.buildMany(SampleItem.name, -2);
+
+                expect(mockSampleItemList.length).toBe(1);
+            });
         });
 
-        it('returns the one object when no value is provided', () => {
-            const mockClassList = FactoryMate.buildMany(MockClass.name);
+        describe('specifying class name', () => {
+            it('returns a class of the correct type', () => {
+                const mockSampleItemList = FactoryMate.buildMany('SampleItem', 3);
 
-            expect(mockClassList.length).toBe(1);
+                expect(mockSampleItemList.length).toBe(3);
+                mockSampleItemList.forEach((mockSampleItem) => {
+                    expect(mockSampleItem instanceof SampleItem).toBeTruthy();
+                });
+            });
         });
 
-        it('returns the one object when a value less than one is provided', () => {
-            const mockClassList = FactoryMate.buildMany(MockClass.name, -2);
+        describe('specifying class alias', () => {
+            it('returns a class of the correct type', () => {
+                const mockSampleItemList = FactoryMate.buildMany('MockSampleItemWithPrice', 3);
 
-            expect(mockClassList.length).toBe(1);
+                expect(mockSampleItemList.length).toBe(3);
+                mockSampleItemList.forEach((mockSampleItem) => {
+                    expect(mockSampleItem instanceof SampleItemWithPrice).toBeTruthy();
+                });
+            });
         });
     });
 });
