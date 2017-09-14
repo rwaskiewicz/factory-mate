@@ -144,10 +144,9 @@ describe('FactoryMate', () => {
         expect(mockSampleItemList.length).toBe(1);
       });
 
-      it('returns the one object when a value less than one is provided', () => {
-        const mockSampleItemList = FactoryMate.buildMany(SampleItem.name, -2);
-
-        expect(mockSampleItemList.length).toBe(1);
+      it('throws an error when a value less than one is provided', () => {
+        expect(() => FactoryMate.buildMany(SampleItem.name, -2))
+          .toThrowError('Number of Items to Build Must Be 1 or Higher. Received -2');
       });
     });
 

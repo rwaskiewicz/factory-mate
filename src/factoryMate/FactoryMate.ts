@@ -29,7 +29,7 @@ export class FactoryMate {
 
   public static buildMany(itemName: string, numberToBuild = 1, overrideFn?: (clazz: any) => any) {
     if (numberToBuild < 1) {
-      numberToBuild = 1;
+      throw new Error(`Number of Items to Build Must Be 1 or Higher. Received ${numberToBuild}`);
     }
 
     const createdClasses = new Array();
