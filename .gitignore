@@ -1,4 +1,11 @@
+# Output Files 
 coverage/
-node_modules/
 dist/
+*.tgz
+
+# NPM Files
+node_modules/
 npm-debug.log
+
+# IDE
+.vscode

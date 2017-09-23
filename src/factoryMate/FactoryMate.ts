@@ -1,3 +1,5 @@
+import { FactoryStamp } from './FactoryStamp';
+
 export class FactoryMate {
   public static definedConstructors: any[] = [];
 
@@ -6,13 +8,7 @@ export class FactoryMate {
   }
 
   public static defineWithName(cns: any, alias: string, initFunction: () => void) {
-    FactoryMate.definedConstructors.push(
-      {
-        classAlias: alias,
-        classConstructor: cns,
-        initializationFunction: initFunction
-      }
-    );
+    FactoryMate.definedConstructors.push(new FactoryStamp(cns, alias, initFunction));
   }
 
   public static build(itemName: string, overrideFn?: (clazz: any) => any) {
