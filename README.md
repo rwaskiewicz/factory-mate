@@ -13,6 +13,9 @@ FactoryMate can be installed via NPM:
 npm install --save-dev factory-mate
 ```
 
+## Example
+An example project using FactoryMate can be found here: [FactoryMateConsumer](https://github.com/rwaskiewicz/factory-mate-consumer)
+
 ## Usage
 
 Given a simple domain object:
@@ -183,8 +186,21 @@ const sixthValue = providedValueGenerator.nextValue();  // 'right'
 ...
 ```
 
-## Example
-An example project using FactoryMate can be found here [FactoryMateConsumer](https://github.com/rwaskiewicz/factory-mate-consumer)
+## Recipes 
+### Creating a Random Number Generator
+A random number generator can be created by passing a `Math.random()` function call wrapped in an array to the `ProvidedNumberGenerator` class:
+
+```typescript
+FactoryMate.define(GroceryItem, (): GroceryItem => {
+  // Each call to randomNumberGenerator.nextValue() will produce a number between 0 and 9
+  const randomNumberGenerator = new ProvidedValueGenerator([Math.floor(Math.random() * 10)], true);
+
+  const groceryItem = new GroceryItem();
+  groceryItem.id = randomNumberGenerator.nextValue();
+  groceryItem.groceryName = 'Chips';
+  return groceryItem;
+});
+```
 
 ## License
 FactoryMate is distributed under the [MIT license](https://opensource.org/licenses/MIT)
