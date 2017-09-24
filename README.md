@@ -191,10 +191,10 @@ const sixthValue = providedValueGenerator.nextValue();  // 'right'
 A random number generator can be created by passing a `Math.random()` function call wrapped in an array to the `ProvidedNumberGenerator` class:
 
 ```typescript
-FactoryMate.define(GroceryItem, (): GroceryItem => {
-  // Each call to randomNumberGenerator.nextValue() will produce a number between 0 and 9
-  const randomNumberGenerator = new ProvidedValueGenerator([Math.floor(Math.random() * 10)], true);
+// Each call to randomNumberGenerator.nextValue() will produce a number between 0 and 9
+const randomNumberGenerator = new ProvidedValueGenerator([Math.floor(Math.random() * 10)], true);
 
+FactoryMate.define(GroceryItem, (): GroceryItem => {
   const groceryItem = new GroceryItem();
   groceryItem.id = randomNumberGenerator.nextValue();
   groceryItem.groceryName = 'Chips';
