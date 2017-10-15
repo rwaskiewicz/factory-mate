@@ -9,7 +9,7 @@ describe('FactoryMate', () => {
   const sampleItemWithPriceInitializer = () => new SampleItemWithPrice(2, 'Priced Sample Item Name', 3.50);
 
   beforeAll(() => {
-    if (FactoryMate.definedConstructors.length !== 0) {
+    if (FactoryMate.definedConstructors.size !== 0) {
       fail('The initial value of the constructors should be zero');
     }
     FactoryMate.define(SampleItem, sampleItemInitializer);
@@ -20,7 +20,7 @@ describe('FactoryMate', () => {
     let definedConstructor;
 
     beforeAll(() => {
-      definedConstructor = FactoryMate.definedConstructors[0];
+      definedConstructor = FactoryMate.definedConstructors.get('SampleItem');
     });
 
     it('has the correct constructor', () => {
@@ -36,7 +36,7 @@ describe('FactoryMate', () => {
     let definedConstructor;
 
     beforeAll(() => {
-      definedConstructor = FactoryMate.definedConstructors[1];
+      definedConstructor = FactoryMate.definedConstructors.get('MockSampleItemWithPrice');
     });
 
     it('has the correct constructor', () => {

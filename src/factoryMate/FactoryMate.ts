@@ -1,14 +1,14 @@
 import { FactoryStamp } from './FactoryStamp';
 
 export class FactoryMate {
-  public static definedConstructors: any[] = [];
+  public static definedConstructors: Map<string, any> = new Map();
 
   public static define(cns: any, initFunction: () => void) {
     FactoryMate.defineWithName(cns, cns.name, initFunction);
   }
 
   public static defineWithName(cns: any, alias: string, initFunction: () => void) {
-    FactoryMate.definedConstructors.push(new FactoryStamp(cns, alias, initFunction));
+    FactoryMate.definedConstructors.set(alias, new FactoryStamp(cns, initFunction));
   }
 
   public static build(itemName: string, overrideFn?: (clazz: any) => any) {
@@ -36,9 +36,7 @@ export class FactoryMate {
   }
 
   private static locateConstructor(objectName: string) {
-    const clazz = FactoryMate.definedConstructors.find((stored) => {
-      return stored.classAlias === objectName;
-    });
+    const clazz = FactoryMate.definedConstructors.get(objectName);
 
     if (clazz === undefined) {
       throw new Error(`Class with name ${objectName} is not registered to FactoryMate.`);
