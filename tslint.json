@@ -54,7 +54,8 @@
     "interface-name": [
       true,
       "never-prefix"
-    ]
+    ],
+    "eofline": true    
   },
   "rulesDirectory": []
 }
