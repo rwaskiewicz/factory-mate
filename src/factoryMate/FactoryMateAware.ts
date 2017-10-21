@@ -1,5 +1,4 @@
-// TODO: Find better way to determine use of 'Function' for the parameter
-export function FactoryMateAware(constructor: any) {
+export function FactoryMateAware(constructor: () => {}) {
   if (!constructor.prototype) {
     throw (new Error(`The provided constructor does not have a prototype associated with it.`));
   } else if (!constructor.prototype.hasOwnProperty('define')) {
