@@ -24,6 +24,6 @@ export class ProvidedValueGenerator<T> implements Generator<T> {
   }
 
   private isCurrentIndexOutOfBounds(): boolean {
-    return this.currentIndex + 1 > this.values.length;
+    return this.currentIndex === this.values.length;
   }
 }
