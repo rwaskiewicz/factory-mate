@@ -1,24 +1,24 @@
-import { FactoryStamp } from './FactoryStamp';
+import { FactoryTemplate } from './FactoryTemplate';
 import { SampleItem } from './test-fixtures/SampleItem';
 
-describe('FactoryStamp', () => {
+describe('FactoryTemplate', () => {
   describe('Instantiation', () => {
     const classConstructor = SampleItem;
     const initFunction = () => {};
-    let factoryStamp: FactoryStamp;
+    let factoryTemplate: FactoryTemplate;
 
     beforeEach(() => {
-      factoryStamp = new FactoryStamp(classConstructor, initFunction);
+      factoryTemplate = new FactoryTemplate(classConstructor, initFunction);
     });
 
     it('sets the classConstructor property correctly', () => {
-      expect(factoryStamp.classConstructor).toBeDefined();
-      expect(factoryStamp.classConstructor).toEqual(SampleItem);
+      expect(factoryTemplate.classConstructor).toBeDefined();
+      expect(factoryTemplate.classConstructor).toEqual(SampleItem);
     });
 
     it('sets the initializationFunction property correctly', () => {
-      expect(factoryStamp.initializationFunction).toBeDefined();
-      expect(factoryStamp.initializationFunction).toEqual(initFunction);
+      expect(factoryTemplate.initializationFunction).toBeDefined();
+      expect(factoryTemplate.initializationFunction).toEqual(initFunction);
     });
   });
 });

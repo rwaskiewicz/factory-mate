@@ -1,4 +1,4 @@
-export class FactoryStamp {
+export class FactoryTemplate {
   public classConstructor: any;
   public initializationFunction: () => void;
 

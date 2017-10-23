@@ -1,5 +1,6 @@
 # Release Notes
 ## [v1.3.2](https://github.com/rwaskiewicz/factory-mate/compare/v1.3.1...develop) - Unreleased
+- Renamed `FactoryStamp` to `FactoryTemplate` to be more consistent in naming
 - Updated template storage to use a Set
 - Made definition of `FactoryMateAware` ctor more succinct in its parameter type definition (no longer uses `any`)
 

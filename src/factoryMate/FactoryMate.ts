@@ -1,4 +1,4 @@
-import { FactoryStamp } from './FactoryStamp';
+import { FactoryTemplate } from './FactoryTemplate';
 
 export class FactoryMate {
   public static definedConstructors: Map<string, any> = new Map();
@@ -8,7 +8,7 @@ export class FactoryMate {
   }
 
   public static defineWithName(cns: any, alias: string, initFunction: () => void) {
-    FactoryMate.definedConstructors.set(alias, new FactoryStamp(cns, initFunction));
+    FactoryMate.definedConstructors.set(alias, new FactoryTemplate(cns, initFunction));
   }
 
   public static build(itemName: string, overrideFn?: (clazz: any) => any) {
