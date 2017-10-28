@@ -8,7 +8,7 @@ export class FactoryMate {
   }
 
   public static defineWithName(cns: any, alias: string, initFunction: () => void) {
-    FactoryMate.definedConstructors.set(alias, new FactoryTemplate(cns, initFunction));
+    FactoryMate.storeTemplate(alias, new FactoryTemplate(cns, initFunction));
   }
 
   public static build(itemName: string, overrideFn?: (clazz: any) => any) {
@@ -33,6 +33,13 @@ export class FactoryMate {
       createdClasses.push(FactoryMate.build(itemName, overrideFn));
     }
     return createdClasses;
+  }
+
+  private static storeTemplate(alias: string, template: FactoryTemplate) {
+    if (FactoryMate.definedConstructors.get(alias)) {
+      throw new Error(`A template with alias '${alias}' has been registered already.`);
+    }
+    FactoryMate.definedConstructors.set(alias, template);
   }
 
   private static locateConstructor(objectName: string) {

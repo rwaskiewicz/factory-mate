@@ -30,6 +30,11 @@ describe('FactoryMate', () => {
     it('has the correct anonymous function', () => {
       expect(definedConstructor.initializationFunction).toEqual(sampleItemInitializer);
     });
+
+    it('throws an error when trying to register a template with a pre-registered alias', () => {
+      expect(() => FactoryMate.define(SampleItem, sampleItemInitializer))
+        .toThrowError(`A template with alias 'SampleItem' has been registered already.`);
+    });
   });
 
   describe('defineWithName()', () => {
@@ -45,6 +50,12 @@ describe('FactoryMate', () => {
 
     it('has the correct anonymous function', () => {
       expect(definedConstructor.initializationFunction).toEqual(sampleItemWithPriceInitializer);
+    });
+
+    it('throws an error when trying to register a template with a pre-registered alias', () => {
+      expect(() => FactoryMate
+        .defineWithName(SampleItemWithPrice, 'MockSampleItemWithPrice', sampleItemWithPriceInitializer))
+        .toThrowError(`A template with alias 'MockSampleItemWithPrice' has been registered already.`);
     });
   });
 
