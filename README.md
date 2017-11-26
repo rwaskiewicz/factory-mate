@@ -6,6 +6,23 @@
 FactoryMate is a TypeScript-based fixture library for instantiating domain objects for testing purposes, inspired by 
 the [Factory Duke](https://github.com/regis-leray/factory_duke) project.
 
+
+## Table of Contents
+- **[Getting Started](#getting-started)**<br>
+- **[Example Project](#example-project)**<br>
+- **[Usage](#usage)**<br>
+  - **[Factory Classes](#factory-classes)**<br>
+  - **[Additional Building Methods](#additional-building-methods)**<br>
+    - **[Named Templates](#named-templates)**<br>
+    - **[Overriding a Template's Variables](#overriding-a-templates-variables)**<br>
+    - **[Building Many of the Same Object](#building-many-of-the-same-object)**<br>
+- **[Sequence Generation](#sequence-generation)**<br>
+  - **[NumberGenerator](#numbergenerator)**<br>
+  - **[ProvidedValueGenerator](#providedvaluegenerator)**<br>
+- **[Recipes](#recipes)**<br>
+  - **[Creating a Random Number Generator](#creating-a-random-number-generator)**<br>
+- **[License](#license)**<br>
+
 ## Getting Started
 
 FactoryMate can be installed via NPM:
@@ -13,7 +30,7 @@ FactoryMate can be installed via NPM:
 npm install --save-dev factory-mate
 ```
 
-## Example
+## Example Project
 An example project using FactoryMate can be found here: [FactoryMateConsumer](https://github.com/rwaskiewicz/factory-mate-consumer)
 
 ## Usage
@@ -115,7 +132,8 @@ To build several objects of the same type:
 const groceryItems: GroceryItem[] = FactoryMate.buildMany(GroceryItem.name, 3);
 ```
 
-### Sequence Generation
+## Sequence Generation
+### NumberGenerator
 FactoryMate supports infinite, numerical sequence generation via the ```NumberGenerator``` class.  This can be helpful for the purposes of generating ID values for domain objects to better represent real world scenarios (e.g. IDs in a data store) 
 
 In order to add sequential generation support to an entity, it can be imported into it's factory as such:
@@ -151,7 +169,7 @@ console.log(JSON.stringify(groceryItem1)); //'{"id":1,"groceryName":"chewy cooki
 console.log(JSON.stringify(groceryItem2)); //'{"id":2,"groceryName":"chewy cookies"}'
 console.log(JSON.stringify(groceryItem3)); //'{"id":3,"groceryName":"chewy cookies"}'
 ```
-#### Changing sequence values
+#### Changing Numerical Sequence Values
 By default, ```NumberGenerator``` starts at a value of 1 and increments by 1.  These values can be altered at instantiation time if desired
 ``` typescript
 // Start at one, increment by one: 1, 2, 3 ...

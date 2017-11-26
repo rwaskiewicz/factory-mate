@@ -3,6 +3,7 @@
 - Renamed `FactoryStamp` to `FactoryTemplate` to be more consistent in naming
 - Updated template storage to use a Set
 - Made definition of `FactoryMateAware` ctor more succinct in its parameter type definition (no longer uses `any`)
+- Added Table of Contents to README
 
 ## [v1.3.1](https://github.com/rwaskiewicz/factory-mate/compare/v1.3.0...v1.3.1) - September 28, 2017
 - Refactored `FactoryStamp` into it's own class for storing templates
