@@ -1,4 +1,4 @@
-export function FactoryMateAware(constructor: () => {}) {
+export function FactoryMateAware(constructor: any) {
   if (!constructor.prototype) {
     throw (new Error(`The provided constructor does not have a prototype associated with it.`));
   } else if (!constructor.prototype.hasOwnProperty('define')) {
